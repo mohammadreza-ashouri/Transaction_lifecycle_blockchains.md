@@ -155,3 +155,41 @@ if (validateBlock(receivedBlock)) {
 ## 11. State Update and Confirmation
 **Explanation**:  The blockchain state is updated to reflect the transactions, and users can see their transaction as confirmed once it's included in the finalized block.
 
+
+
+# Ethereum Transaction Lifecycle Chart
+
+The following diagram illustrates the 11 stages of the Ethereum transaction lifecycle in a circular manner:
+
+```mermaid
+flowchart TD
+    %% Define the nodes
+    A[1. Transaction Creation]
+    B[2. Transaction Signing]
+    C[3. Transaction Broadcasting]
+    D[4. Transaction Propagation]
+    E[5. Transaction Validation]
+    F[6. Inclusion in Mempool]
+    G[7. Transaction Selection by Validators]
+    H[8. Block Proposal and Creation]
+    I[9. Block Validation and Consensus]
+    J[10. Block Finalization]
+    K[11. State Update and Confirmation]
+
+    %% Arrange nodes in a circle by linking them in a loop
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+    H --> I
+    I --> J
+    J --> K
+    K --> A
+
+    %% Style the nodes (optional)
+    classDef stage fill:#f9f,stroke:#333,stroke-width:2px
+    class A,B,C,D,E,F,G,H,I,J,K stage
+
