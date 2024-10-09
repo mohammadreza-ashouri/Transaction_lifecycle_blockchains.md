@@ -87,3 +87,71 @@ function validateTransaction(tx) {
 }
 
 ```
+
+## 6. Inclusion in Mempool
+**Explanation**: Validated transactions are stored in the mempool, a pool of pending transactions awaiting inclusion in a block and nodes automatically handle mempool management.
+
+## 7. Transaction Selection by Validators
+**Explanation**: Validators select transactions from the mempool, often prioritizing those offering higher gas prices to maximize their rewards.
+
+**Pseudocode**:
+```javascript
+function selectTransactionsForBlock(mempool) {
+  // Sort transactions by gas price in descending order
+  const sortedTransactions = mempool.sort((a, b) => b.gasPrice - a.gasPrice);
+  const transactionsToInclude = [];
+  let totalGasUsed = 0;
+
+  for (const tx of sortedTransactions) {
+    if (totalGasUsed + tx.gasLimit <= blockGasLimit) {
+      transactionsToInclude.push(tx);
+      totalGasUsed += tx.gasLimit;
+    } else {
+      break; // Stop if gas limit for the block is reached
+    }
+  }
+  return transactionsToInclude;
+}
+```
+
+## 8. Block Proposal and Creation
+**Explanation**:  A validator assembles the selected transactions into a new block and proposes it to the network.
+
+**Pseudocode**:
+```javascript
+const transactions = selectTransactionsForBlock(mempool);
+const block = createNewBlock(transactions, previousBlockHash, validatorAddress);
+broadcastBlock(block);
+```
+
+## 9. Block Validation and Consensus
+**Explanation**:  Other validators verify the block's validity and, through the consensus mechanism, agree to add it to the blockchain.
+
+**Pseudocode**:
+```javascript
+function validateBlock(block) {
+  if (
+    verifyBlockHeader(block.header) &&
+    verifyTransactions(block.transactions) &&
+    verifyStateTransitions(block)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+if (validateBlock(receivedBlock)) {
+  addBlockToChain(receivedBlock);
+  broadcastAcceptance(receivedBlock);
+} else {
+  rejectBlock(receivedBlock);
+}
+```
+
+## 10. Block Finalization
+**Explanation**:  The block becomes finalized after a supermajority of validators attest to its validity, making included transactions irreversible. Finalization is managed by Ethereum's Proof of Stake consensus mechanism.
+
+## 11. State Update and Confirmation
+**Explanation**:  The blockchain state is updated to reflect the transactions, and users can see their transaction as confirmed once it's included in the finalized block.
+
