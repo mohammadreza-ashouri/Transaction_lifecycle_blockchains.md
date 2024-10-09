@@ -57,3 +57,33 @@ const transaction = {
 const wallet = new ethers.Wallet(privateKey); // Initialize wallet with private key
 const signedTransaction = await wallet.signTransaction(transaction); // Sign the transaction
 ```
+
+## 3. Transaction Broadcasting
+**Explanation**: The signed transaction is sent to an Ethereum node to be broadcasted to the network.
+**Pseudocode**:
+```javascript
+const provider = ethers.getDefaultProvider("mainnet"); // Connect to Ethereum network
+const txResponse = await provider.sendTransaction(signedTransaction); // Broadcast the transaction
+```
+
+## 4. Transaction Propagation
+**Explanation**: The transaction propagates through the network as nodes share it with their peers.
+
+## 5. Transaction Validation
+**Explanation**: Each node that receives the transaction validates it by checking the signature, nonce, sender's balance, and gas parameters.
+**Pseudocode**:
+```javascript
+function validateTransaction(tx) {
+  if (
+    verifySignature(tx) &&
+    checkNonce(tx.nonce, tx.from) &&
+    checkBalance(tx.from, tx.value + tx.gasLimit * tx.gasPrice) &&
+    checkGasLimits(tx.gasLimit)
+  ) {
+    addToMempool(tx);
+  } else {
+    discardTransaction(tx);
+  }
+}
+
+```
