@@ -14,6 +14,7 @@ const transaction = {
   nonce: currentNonce, // Must be fetched from the network for the sender's address
   data: "0x", // Optional data field (empty for Ether transfer)
 };
+```
 
 ## 2. Transaction Signing
 **Explanation**: The user signs the transaction with their private key to ensure authenticity and prevent unauthorized modifications.
@@ -22,4 +23,4 @@ const transaction = {
 ```javascript
 const wallet = new ethers.Wallet(privateKey); // Initialize wallet with private key
 const signedTransaction = await wallet.signTransaction(transaction); // Sign the transaction
-
+```
