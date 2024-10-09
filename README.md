@@ -48,6 +48,23 @@ const transaction = {
   data: "0x", // Optional data field (empty for Ether transfer)
 };
 ```
+Note that when creating a transaction, users must ensure they have sufficient balance to cover both the amount being sent and the transaction fees.
+
+Total Transaction Cost
+Total Transaction Cost
+=
+Value
++
+(
+Gas Limit
+×
+Gas Price
+)
+Total Transaction Cost=Value+(Gas Limit×Gas Price)
+Value: The amount of Ether (ETH) to send.
+Gas Limit: The maximum amount of gas units the transaction can consume.
+Gas Price: The fee per unit of gas (in wei).
+
 
 ## 2. Transaction Signing
 **Explanation**: The user signs the transaction with their private key to ensure authenticity and prevent unauthorized modifications.
